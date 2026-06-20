@@ -21,13 +21,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'  # Добавлено для ускорения
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci  # Используем npm ci вместо npm install (быстрее и надежнее)
+        run: npm ci
 
       - name: Run tests
-        run: npm test  # Будет использовать npx jest из package.json
+        run: npm test
 
   deploy:
     needs: build-and-test
@@ -42,5 +42,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: ./src
           publish_branch: gh-pages
+          force_orphan: true
